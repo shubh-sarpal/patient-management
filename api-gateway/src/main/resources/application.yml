@@ -5,6 +5,14 @@ spring:
   cloud:
     gateway:
       routes:
+#        http://localhost:4004/auth/login
+#        API gateway -> http://auth-service:4005/login
+        - id: auth-service-roue
+          uri: http://auth-service:4005
+          predicates:
+            - Path=/auth/**
+          filters:
+            - StripPrefix=1
 ##       REST CLIENT -> http://localhost:4004/api/patients
 ##       API Gateway -> http://patient-service:4000/patients
 ##       Patient Service (SpringBoot API)-> /patients -> Patients array
